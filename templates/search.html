@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% macro render_field(field) %}
+<div class="form-group">
+    <label for="{{ field.name }}" class="col-lg-2 control-label">{{ field.label.text }}</label>
+    <div class="col-lg-10">
+        {{ field(class_='form-control', **kwargs)|safe }}
+        <ul>
+            {% for error in field.errors %}
+            <li style="color:red;">{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endmacro %}
+{% macro render_radio_fields(field) %}
+<div class="form-group">
+    <label class="col-lg-2 control-label">{{ field.label.text }}</label>
+    <div class="col-lg-10">
+        {% for subfield in field %}
+        <div class="radio">
+            <label>
+                {{ subfield }}
+                {{ subfield.label.text }}
+            </label>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endmacro %}
+{% block content %}
+<div class="content-section">
+    <form method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-3">Haku</legend>
+            <div class="form-group">
+                {{ render_field(form.item) }}
+            </div>
+            <div class="form-group">
+                {{ render_field(form.ad) }}
+            </div>
+                {{ render_radio_fields(form.radios) }}
+                {{ render_field(form.cat) }}
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+    </form>
+</div>
+{% endblock %}

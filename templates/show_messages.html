@@ -3,11 +3,12 @@
 {% for m in messages %}
 <article class="media content-section">
     <div class="row">
-        <div class="col-sm">
-            <p class="article-content">{{ m.sent_at.strftime("%X") }}</p>
+        <div class="col-md-8">
+            <p class="article-content">{{ m.sent_at.strftime("%m/%d/%Y, %H:%M:%S") }}</p>
+            <p class="article-content">{{ m[4] }} ---> {{ m[5] }}</p>
             <p class="article-content">{{ m.content }}</p>
         </div>
-        <div class="col-sm">
+        <div class="col-md-8">
             <a href="/new_message/{{ m.from_id }}" class="btn btn-sm" role="button" aria-disabled="true">vastaa
                 viestiin</a>
         </div>

@@ -2,7 +2,7 @@ from app import app
 import messages, users
 
 from flask import Flask, render_template, request, flash, redirect, make_response
-from forms import RegistrationForm, LoginForm, new_adForm, new_mesageForm
+from forms import RegistrationForm, LoginForm, new_adForm, new_mesageForm, search_Form
 
 
 @app.route("/")
@@ -106,6 +106,24 @@ def new_ad():
         else:
             flash('new_ad Unsuccessful. Please check username and password', 'danger')
     return render_template('new_ad.html', title='new_ad', form=form)
+
+@app.route("/search", methods=['GET', 'POST'])
+def search():
+    form = search_Form()
+    result = messages.get_cat()
+    form.cat.choices = [(r['id'],r['cat_name'] ) for r in result]
+    if form.validate_on_submit():
+        cat_id = int(form.cat.data)
+        ad_type = int(form.radios.data)
+        item = form.item.data
+        ad_text = form.ad.data
+        ads = messages.search(cat_id, ad_type, item, ad_text)
+        if ads != False:
+            return render_template('index.html', lists=ads)
+        else:
+            flash(f'Haku ei tuottanut tulosta', 'danger')
+            return redirect("/")
+    return render_template('search.html', title='Haku', form=form)
 
 
 @app.route("/delete_ad/<int:id>")

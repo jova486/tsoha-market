@@ -35,10 +35,28 @@ def get_messages():
         flash('Kirjaudu jotta voit valita omat viestisi', 'danger')
         return False
     to_id = user_id
-    sql = "SELECT content, from_id, to_id, sent_at FROM messages WHERE to_id=:to_id ORDER BY sent_at DESC"
-    result = db.session.execute(sql, {"to_id":to_id})
+
+    sql = "SELECT M.content, M.from_id, M.to_id, M.sent_at, F.username, T.username FROM messages M LEFT JOIN users F ON M.from_id = F.id LEFT JOIN users T ON M.to_id = T.id WHERE M.from_id=:to_id OR M.to_id=:to_id ORDER BY sent_at DESC"
+    result = db.session.execute(sql, {"from_id":to_id, "to_id":to_id})
     message_list = result.fetchall()
     return message_list
+
+def get_username(user_id):
+    sql = "SELECT username FROM users WHERE user_id=:user_id"
+    result = db.session.execute(sql, {"user_id":user_id})
+    name = result.fetchall()[0]
+    return name
+
+def search(cat_id, ad_type, item, ad_text):
+    print(cat_id)
+    print(ad_type)
+    if(item):
+        sql = "SELECT A.id, A.item, A.ad_text, C.cat_name, A.img, A.user_id FROM ad A, category C WHERE A.cat_id = C.id AND A.ad_type != 5 AND A.cat_id=:cat_id AND A.ad_type=:ad_type AND A.item LIKE :item"
+    else:
+        sql = "SELECT A.id, A.item, A.ad_text, C.cat_name, A.img, A.user_id FROM ad A, category C WHERE A.cat_id = C.id AND A.ad_type != 5 AND A.cat_id=:cat_id AND A.ad_type=:ad_type" 
+    result = db.session.execute(sql, {"cat_id":cat_id, "ad_type":ad_type, "item":item})
+    list = result.fetchall()
+    return list
 
 def new_ad(cat_id, ad_type, valid, item, ad_text, image):
     user_id = users.user_id()

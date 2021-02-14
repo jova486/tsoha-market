@@ -28,8 +28,15 @@ class new_adForm(FlaskForm):
     image = FileField('Lisää kuva', validators=[FileAllowed(['jpg'])])
     submit = SubmitField('Lataa')
 
+class search_Form(FlaskForm):
+    item = StringField('Hae otsikosta')
+    ad = TextAreaField('Hae ilmoitustekstistä')
+    radios = RadioField('Luokka', default='1', choices=[('1', 'Myydään'), ('2', 'Ostetaan')])
+    cat = SelectField('Osastosta', choices=[])
+    submit = SubmitField('Hae')
+
 class new_mesageForm(FlaskForm):
-    message = TextAreaField('Ilmoitus teksti')
+    message = TextAreaField('Ilmoitus teksti', validators=[DataRequired(), Length(min=2, max=3000)])
     submit = SubmitField('Lähetä')
 
 	

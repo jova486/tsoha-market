@@ -1,9 +1,5 @@
 Tietokantasovellus harjoitustyö
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 11bd0c40c4ed77c52cdb9cabb90a8a50e46a6617
 sovellusta voi kokeilla Herokussa: https://tsoha-market.herokuapp.com/
 Voi rekisteröityä ja jättää ilmoituksen ja lähettää viestejä. Ilmoitukseen pitää laittaa kuva muuten se ei näy.
 
