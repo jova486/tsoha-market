@@ -33,14 +33,14 @@
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
             <legend class="border-bottom mb-3">Haku</legend>
+            {{ render_field(form.cat) }}
+            {{ render_radio_fields(form.radios) }}
             <div class="form-group">
                 {{ render_field(form.item) }}
             </div>
             <div class="form-group">
                 {{ render_field(form.ad) }}
             </div>
-                {{ render_radio_fields(form.radios) }}
-                {{ render_field(form.cat) }}
             <div class="form-group">
                 {{ form.submit(class="btn btn-outline-info") }}
             </div>

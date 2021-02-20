@@ -1,15 +1,15 @@
 body {
     background: #fafafa;
-    color: #333333;
+    color: #99a8b3;
     margin-top: 5rem;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    color: #444444;
+    color: #76a8b8;
   }
   
   .bg-steel {
-    background-color: #719bb450;
+    background-color: #dbe7ee;
   }
   
   .site-header .navbar-nav .nav-link {
@@ -33,11 +33,11 @@ body {
   }
   
   .article-title {
-    color: #444444;
+    color: #b5c2c4;
   }
   
   a.article-title:hover {
-    color: #428bca;
+    color: #d8dde2;
     text-decoration: none;
   }
   
@@ -79,7 +79,7 @@ body {
     font-size: 2.5rem;
   }
   .collapsible {
-    background-color: rgb(97, 72, 72);
+    background-color: rgb(160, 191, 211);
     color: white;
     cursor: pointer;
     padding: 18px;

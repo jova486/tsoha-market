@@ -48,13 +48,18 @@ def get_username(user_id):
     return name
 
 def search(cat_id, ad_type, item, ad_text):
-    print(cat_id)
-    print(ad_type)
+    s = "%"
+    item = s+item
+    item +=s
+    ad_text = s+ad_text
+    ad_text +=s
+    sql = """SELECT A.id, A.item, A.ad_text, C.cat_name, A.img, A.user_id FROM ad A, category C 
+        WHERE A.cat_id = C.id AND A.ad_type != 5 AND A.cat_id=:cat_id AND A.ad_type=:ad_type"""
     if(item):
-        sql = "SELECT A.id, A.item, A.ad_text, C.cat_name, A.img, A.user_id FROM ad A, category C WHERE A.cat_id = C.id AND A.ad_type != 5 AND A.cat_id=:cat_id AND A.ad_type=:ad_type AND A.item LIKE :item"
-    else:
-        sql = "SELECT A.id, A.item, A.ad_text, C.cat_name, A.img, A.user_id FROM ad A, category C WHERE A.cat_id = C.id AND A.ad_type != 5 AND A.cat_id=:cat_id AND A.ad_type=:ad_type" 
-    result = db.session.execute(sql, {"cat_id":cat_id, "ad_type":ad_type, "item":item})
+        sql += " AND A.item ILIKE :item"
+    if(ad_text):
+        sql += " AND A.ad_text ILIKE :ad_text"
+    result = db.session.execute(sql, {"cat_id":cat_id, "ad_type":ad_type, "item":item, "ad_text":ad_text})
     list = result.fetchall()
     return list
 

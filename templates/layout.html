@@ -19,9 +19,8 @@
 
 <body>
   <header class="site-header">
-    <nav class="navbar navbar-expand-md fixed-top">
-      <div class="container">
-        <a class="navbar-brand mr-4" href="/">Tsoha Kauppa</a>
+    <nav class="navbar navbar-expand fixed-top bg-light">
+        <a class="navbar-brand" href="/">Tsoha Kauppa</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
           aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -34,7 +33,7 @@
   </header>
   <main role="main" class="container">
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-8 bg-light">
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
         {% for category, message in messages %}
@@ -50,15 +49,14 @@
         <div class="sticky-top">
           <div class="content-section">
             <ul class="list-group">
-              <a class="list-group-item list-group-item-light" href="{{ url_for('login') }}">Kirjaudu</a>
+              <a class="list-group-item list-group-item-light bg-light" href="{{ url_for('login') }}">Kirjaudu</a>
               {% if session['logged_in'] %}
-              <a class="list-group-item list-group-item-light" href="{{ url_for('logout') }}">Ulos</a>
-              <a class="list-group-item list-group-item-light" href="{{ url_for('new_ad') }}">Uusi ilmoitus</a>
-              <a class="list-group-item list-group-item-light" href="\show_messages">Viestit</a>
-              <a class="list-group-item list-group-item-light" href="\my_ads">Omat ilmoitukset</a>
+              <a class="list-group-item list-group-item-light bg-light" href="{{ url_for('logout') }}">Ulos</a>
+              <a class="list-group-item list-group-item-light bg-light" href="{{ url_for('new_ad') }}">Uusi ilmoitus</a>
+              <a class="list-group-item list-group-item-light bg-light" href="\show_messages">Viestit</a>
+              <a class="list-group-item list-group-item-light bg-light" href="\my_ads">Omat ilmoitukset</a>
               {% endif %}
-              <a class="list-group-item list-group-item-light" href="\search">Haku</a>
-              <li class="list-group-item list-group-item-light">jne...</li>
+              <a class="list-group-item list-group-item-light bg-light" href="\search">Haku</a>
             </ul>
             </p>
           </div>

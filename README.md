@@ -3,7 +3,7 @@ Tietokantasovellus harjoitustyö
 sovellusta voi kokeilla Herokussa: https://tsoha-market.herokuapp.com/
 Voi rekisteröityä ja jättää ilmoituksen ja lähettää viestejä. Ilmoitukseen pitää laittaa kuva muuten se ei näy.
 
-Sovelluksen nyky tilanne:
+Sovelluksen nykytilanne:
 - Sovellukseen tulee etusivu jossa näkyvät uusimmat ilmoitukset.
 - Ilmoitukseen tulee otsikko ja pidempi tekstikenttä ja siihen voi myös lisätä yhden kuvan. 
 - Etusivulla näkyvät otsikot joista klikkaamalla avautuu koko ilmoitus
@@ -11,15 +11,12 @@ Sovelluksen nyky tilanne:
 - Käyttäjät voivat lähettää viestejä ilmoituksen jättäjälle ja sovellus ei vastaa tiedoista joita käyttäjät toisilleen lähettävät. Eli näitä tieoja ei salata vaan viestit tallennetaan sellaisenaan tietokantaan
 - Ilmoituksen tekemiseen on lomake johon syötetään tiedot ja valitaan kategoria, ilmoitustyyppi
 -Rekisteröityminen, kirjautuminen ja uloskirjautuminen on toteutettu. 
-
-Toteuttamatta vielä:
-- Ilmoitukset voi valita näytettäväksi myös kategorioittain ilmoitustyyppien mukaan(myynti, osto jne.) ja niitä voi selata sekä tehdä sanhakuja. 
-- Ilmoituksille voi laittaa viimeisen voimassaolopäivän jonka jälkeen ilmoitusta ei näytetä
--Ilmoitusten poistamien on toteuttamatta 
-- Hakuun tulee lomake jossa voi valita kategorian, ilmoitustyypin ja lisätä hakusanan
--useita bugeja korjattavana jotka liittyvät siihen onko käyttäjä rekisteröitynyt vai ei. Lisäksi syötteiden oikeallisuutta pitää parantaa. 
-
-
+- Ilmoitukset voi valita näytettäväksi myös kategorioittain ilmoitustyyppien mukaan(myynti, osto jne.) ja niitä voi selata sekä tehdä sanhakuja. Tämä on toteutettu yhtenä hakuna.  
+-ilmoituksen voi poistaa
+- Haku toteutettu lomakkeella jossa voi valita kategorian, ilmoitustyypin ja lisätä hakusanan sekä otsikosta että ilmoitustekstistä
+ 
+Vielä tehtävää:
+-Ilmoituksille voi laittaa viimeisen voimassaolopäivän jonka jälkeen ilmoitusta ei näytetä (en tiedä omko tämä edes tarpeellinen)
 
 
 Sovellus on tarkoitettu tavaran (tai miksei palveluidenkin) myyntiin, ostamiseen, vaihtamiseen ja lahjoittamiseen. 
