@@ -50,10 +50,10 @@
           <div class="content-section">
             <ul class="list-group">
               
-              {% if session['logged_in']==False %}
+              
               <a class="list-group-item list-group-item-light bg-light" href="{{ url_for('login') }}">Kirjaudu sisään</a>
               <a class="list-group-item list-group-item-light bg-light" href="\search">Haku</a>
-              {% endif %}
+           
               {% if session['logged_in'] %}
               <a class="list-group-item list-group-item-light bg-light" href="{{ url_for('new_ad') }}">Uusi ilmoitus</a>
               <a class="list-group-item list-group-item-light bg-light" href="\show_messages">Viestit</a>
