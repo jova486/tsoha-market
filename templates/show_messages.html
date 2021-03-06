@@ -1,16 +1,25 @@
 {% extends "layout.html" %}
 {% block content %}
+{% if not messages: %}
+<legend class="border-bottom mb-3">Sinulla ei ole viestejä!</legend>
+<a class="list-group-item list-group-item-light bg-light" href="\">Takaisin</a>
+{% endif %}
 {% for m in messages %}
 <article class="media content-section">
-    <div class="row">
-        <div class="col-md-8">
-            <p class="article-content">{{ m.sent_at.strftime("%m/%d/%Y, %H:%M:%S") }}</p>
-            <p class="article-content">{{ m[4] }} ---> {{ m[5] }}</p>
-            <p class="article-content">{{ m.content }}</p>
-        </div>
-        <div class="col-md-8">
-            <a href="/new_message/{{ m.from_id }}" class="btn btn-sm" role="button" aria-disabled="true">vastaa
-                viestiin</a>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <p class="article-content">{{ m.content }}</p>
+
+            </div>
+            <div class="col-sm">
+                <p class="article-content">Lähettäjä: {{ m[4] }} </p>
+                <p class="article-content">Vastaanottaja: {{ m[5] }} </p>
+                <p class="article-content">Lähetetty: {{ m.sent_at.strftime("%d.%m.%Y klo. %H:%M") }}</p>
+                <a href="/new_message/{{ m.from_id }}" class="btn btn-sm" role="button" aria-disabled="true">Vastaa
+                    viestiin</a>
+
+            </div>
         </div>
     </div>
 </article>

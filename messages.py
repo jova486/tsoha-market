@@ -3,10 +3,13 @@ import users
 from flask import make_response, flash
 
 def get_list():
+   
     sql = "SELECT A.id, A.item, A.ad_text, C.cat_name, A.img, A.user_id FROM ad A, category C WHERE A.cat_id = C.id AND A.ad_type != 5 ORDER BY A.sent_at DESC"
     result = db.session.execute(sql)
+   
     list = result.fetchall()
     return list
+
 
 def get_my_list():
     
@@ -54,11 +57,20 @@ def search(cat_id, ad_type, item, ad_text):
     ad_text = s+ad_text
     ad_text +=s
     sql = """SELECT A.id, A.item, A.ad_text, C.cat_name, A.img, A.user_id FROM ad A, category C 
-        WHERE A.cat_id = C.id AND A.ad_type != 5 AND A.cat_id=:cat_id AND A.ad_type=:ad_type"""
-    if(item):
-        sql += " AND A.item ILIKE :item"
-    if(ad_text):
-        sql += " AND A.ad_text ILIKE :ad_text"
+        WHERE A.cat_id = C.id AND A.ad_type != 5 AND A.cat_id=:cat_id and A.ad_type=:ad_type"""
+    if(item != "%%"):
+        print("item")
+        if(ad_text != "%%"):
+            sql += " AND (A.item ILIKE :item"
+        else:
+            sql += " AND A.item ILIKE :item"
+
+    if(ad_text != "%%"):
+        print("ad_text")
+        if(item != "%%"):
+            sql += " OR A.ad_text ILIKE :ad_text)"
+        else:
+            sql += " AND A.ad_text ILIKE :ad_text"
     result = db.session.execute(sql, {"cat_id":cat_id, "ad_type":ad_type, "item":item, "ad_text":ad_text})
     list = result.fetchall()
     return list

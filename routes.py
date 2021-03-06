@@ -5,15 +5,14 @@ from flask import Flask, render_template, request, flash, redirect, make_respons
 from forms import RegistrationForm, LoginForm, new_adForm, new_mesageForm, search_Form
 
 
+
 @app.route("/")
 def index():
+    
     lists = messages.get_list()
     return render_template('index.html', lists=lists)
 
 
-@app.route("/about")
-def about():
-    return render_template('about.html', title='About')
 
 @app.route("/new_message/<int:to_id>", methods=['GET', 'POST'])
 def new_message(to_id):
@@ -35,10 +34,8 @@ def new_message(to_id):
 @app.route("/show_messages")
 def show_messages():
     m = messages.get_messages()
-    if m: 
-        return render_template('show_messages.html', messages=m)
-    else:
-        return redirect("/")
+    return render_template('show_messages.html', messages=m)
+   
 
 @app.route("/my_ads")
 def my_ads():
@@ -95,13 +92,13 @@ def new_ad():
     form.cat.choices = [(r['id'],r['cat_name'] ) for r in result]
     if form.validate_on_submit():
         cat_id = form.cat.data
-        ad_type = 1
+        ad_type = form.radios.data
         valid = 30
         item = form.item.data
         ad_text = form.ad.data
         image = form.image.data
         if messages.new_ad(cat_id, ad_type, valid, item, ad_text, image):
-            flash(f'new_ad done {form.item.data}!', 'success')
+            flash(f'Ilmoituksen jättäminen onnistui otsikolla:  {form.item.data}!', 'success')
             return redirect("/")
         else:
             flash('new_ad Unsuccessful. Please check username and password', 'danger')
@@ -118,10 +115,13 @@ def search():
         item = form.item.data
         ad_text = form.ad.data
         ads = messages.search(cat_id, ad_type, item, ad_text)
+        category_id = cat_id
+        type_id = ad_type
+
         if ads != False:
-            return render_template('index.html', lists=ads)
+            return render_template('search_results.html', lists=ads)
         else:
-            flash(f'Haku ei tuottanut tulosta', 'danger')
+            flash(f'Haku ei jostain syystä onnistunut', 'danger')
             return redirect("/")
     return render_template('search.html', title='Haku', form=form)
 

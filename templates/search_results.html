@@ -1,9 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
 {% if not lists: %}
-<legend class="border-bottom mb-3">Sinulla ei vielä ole omia ilmoituksia!</legend>
-
-<a class="list-group-item list-group-item-light bg-light" href="{{ url_for('new_ad') }}">Lisää ilmoitus!</a>
+<legend class="border-bottom mb-3">Haun perusteella ei löytynyt yhtään ilmoitusta!</legend>
+<a class="list-group-item list-group-item-light bg-light" href="\search">Tee uusi haku</a>
+<a class="list-group-item list-group-item-light bg-light" href="\">Takaisin</a>
 {% endif %}
 {% for list in lists %}
 <p>
@@ -20,11 +20,14 @@
       </div>
       <div class="col-sm">
         <img src="/ad_photo/{{ list[4] }}" alt="Kuva" >
-        <a href="/delete_ad/{{ list.id }}" class="btn btn-sm" role="button" aria-disabled="true">Poista ilmoitus</a>
+        <a href="/new_message/{{ list[5] }}" class="btn btn-sm" role="button" aria-disabled="true">Lähetä viesti ilmottajalle</a>
       </div>
     </div>
   </div>
 
 </div>
+
+
 {% endfor %}
+
 {% endblock %}
