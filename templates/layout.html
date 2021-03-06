@@ -51,8 +51,8 @@
             <ul class="list-group">
               
               
-              <a class="list-group-item list-group-item-light bg-light" href="{{ url_for('login') }}">Kirjaudu sisään</a>
-              <a class="list-group-item list-group-item-light bg-light" href="\search">Haku</a>
+              
+              
            
               {% if session['logged_in'] %}
               <a class="list-group-item list-group-item-light bg-light" href="{{ url_for('new_ad') }}">Uusi ilmoitus</a>
@@ -60,6 +60,9 @@
               <a class="list-group-item list-group-item-light bg-light" href="\my_ads">Omat ilmoitukset</a>
               <a class="list-group-item list-group-item-light bg-light" href="\search">Haku</a>
               <a class="list-group-item list-group-item-light bg-light" href="{{ url_for('logout') }}">Kirjaudu ulos</a>
+              {% else: %}
+              <a class="list-group-item list-group-item-light bg-light" href="\search">Haku</a>
+              <a class="list-group-item list-group-item-light bg-light" href="{{ url_for('login') }}">Kirjaudu sisään</a>
               {% endif %}
               
             </ul>
