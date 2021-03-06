@@ -1,51 +1,14 @@
 from app import app
-import messages, users
-
+import messages, users, ad
 from flask import Flask, render_template, request, flash, redirect, make_response
 from forms import RegistrationForm, LoginForm, new_adForm, new_mesageForm, search_Form
-
 
 
 @app.route("/")
 def index():
     
-    lists = messages.get_list()
+    lists = ad.get_list()
     return render_template('index.html', lists=lists)
-
-
-
-@app.route("/new_message/<int:to_id>", methods=['GET', 'POST'])
-def new_message(to_id):
-    user_id = users.user_id()
-    if user_id == 0:
-        flash(f'Kirjaudu jotta voit voit lähettää viestin', 'danger')
-        return redirect("/")
-    form = new_mesageForm()
-    if form.validate_on_submit():
-        content = form.message.data
-        if messages.send(content, to_id):
-            flash(f'Viesti lähetetty {form.message.data}!', 'success')
-            return redirect("/")
-        else:
-            flash('Voi hitsi! Viestin lähettäminen ei onnistunut', 'danger')
-
-    return render_template('message.html', title='Lähetä viesti', form=form)
-
-@app.route("/show_messages")
-def show_messages():
-    m = messages.get_messages()
-    return render_template('show_messages.html', messages=m)
-   
-
-@app.route("/my_ads")
-def my_ads():
-    ads = messages.get_my_list()
-    if ads != False:
-        return render_template('my_ads.html', lists=ads)
-    else:
-        flash(f'Kirjaudu jotta voit nähdä omat ilmoituksesi', 'danger')
-        return redirect("/")
-
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -58,7 +21,6 @@ def register():
             flash('Kirjautuminen epäonnistui. Tarkista käyttäjätunnus ja salasana', 'danger')
 
     return render_template('register.html', title='Luo tili', form=form)
-
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -81,6 +43,46 @@ def logout():
     flash(f'Ulos kirjautuminen onnistui!', 'success')
     return redirect("/")
 
+@app.route("/new_message/<int:to_id>", methods=['GET', 'POST'])
+def new_message(to_id):
+    user_id = users.user_id()
+    if user_id == 0:
+        flash(f'Kirjaudu jotta voit voit lähettää viestin', 'danger')
+        return redirect("/")
+    form = new_mesageForm()
+    if form.validate_on_submit():
+        content = form.message.data
+        if messages.send(content, to_id):
+            flash(f'Viesti lähetetty {form.message.data}!', 'success')
+            return redirect("/")
+        else:
+            flash('Voi hitsi! Viestin lähettäminen ei onnistunut', 'danger')
+
+    return render_template('message.html', title='Lähetä viesti', form=form)
+
+@app.route("/show_messages")
+def show_messages():
+    m = messages.get_messages()
+    name = users.get_username()
+    print(name)
+    return render_template('show_messages.html', messages=m, name=name)
+   
+@app.route("/my_ads")
+def my_ads():
+    ads = ad.get_my_list()
+    if ads != False:
+        return render_template('my_ads.html', lists=ads)
+    else:
+        flash(f'Kirjaudu jotta voit nähdä omat ilmoituksesi', 'danger')
+        return redirect("/")
+
+@app.route("/delete_ad/<int:id>")
+def delete_ad(id):
+    
+    ad.delete_ad(id)
+  
+    return redirect("/my_ads")
+
 @app.route("/new_ad", methods=['GET', 'POST'])
 def new_ad():
     user_id = users.user_id()
@@ -88,7 +90,7 @@ def new_ad():
         flash(f'Kirjaudu jotta voit jättää ilmoituksen', 'danger')
         return redirect("/")
     form = new_adForm()
-    result = messages.get_cat()
+    result = ad.get_cat()
     form.cat.choices = [(r['id'],r['cat_name'] ) for r in result]
     if form.validate_on_submit():
         cat_id = form.cat.data
@@ -97,7 +99,7 @@ def new_ad():
         item = form.item.data
         ad_text = form.ad.data
         image = form.image.data
-        if messages.new_ad(cat_id, ad_type, valid, item, ad_text, image):
+        if ad.new_ad(cat_id, ad_type, valid, item, ad_text, image):
             flash(f'Ilmoituksen jättäminen onnistui otsikolla:  {form.item.data}!', 'success')
             return redirect("/")
         else:
@@ -107,14 +109,14 @@ def new_ad():
 @app.route("/search", methods=['GET', 'POST'])
 def search():
     form = search_Form()
-    result = messages.get_cat()
+    result = ad.get_cat()
     form.cat.choices = [(r['id'],r['cat_name'] ) for r in result]
     if form.validate_on_submit():
         cat_id = int(form.cat.data)
         ad_type = int(form.radios.data)
         item = form.item.data
         ad_text = form.ad.data
-        ads = messages.search(cat_id, ad_type, item, ad_text)
+        ads = ad.search(cat_id, ad_type, item, ad_text)
         category_id = cat_id
         type_id = ad_type
 
@@ -125,24 +127,10 @@ def search():
             return redirect("/")
     return render_template('search.html', title='Haku', form=form)
 
-
-@app.route("/delete_ad/<int:id>")
-def delete_ad(id):
-    
-    messages.delete_ad(id)
-  
-    return redirect("/my_ads")
-
-@app.route("/ad/<int:id>")
-def ad(id):
-    
-    a = messages.get_ad(id)
-    return render_template('ad.html', ad=a)
-
 @app.route("/ad_photo/<int:id>")
 def ad_photo(id):
     
-    image = messages.get_image(id)
+    image = ad.get_image(id)
   
     return image
     

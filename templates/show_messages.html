@@ -13,11 +13,11 @@
 
             </div>
             <div class="col-sm">
-                <p class="article-content">Lähettäjä: {{ m[4] }} </p>
-                <p class="article-content">Vastaanottaja: {{ m[5] }} </p>
                 <p class="article-content">Lähetetty: {{ m.sent_at.strftime("%d.%m.%Y klo. %H:%M") }}</p>
+                <p class="article-content">{{ m[4] }} --> {{ m[5] }}</p>
                 <a href="/new_message/{{ m.from_id }}" class="btn btn-sm" role="button" aria-disabled="true">Vastaa
                     viestiin</a>
+
 
             </div>
         </div>
