@@ -4,6 +4,8 @@ sovellusta voi kokeilla Herokussa: https://tsoha-market.herokuapp.com/
 Voi rekisteröityä ja jättää ilmoituksen ja lähettää viestejä. Ilmoitukseen pitää laittaa kuva muuten se ei näy.
 
 Sovelluksen nykytilanne:
+- Haku toimii nyt odotetusti
+- Nyt voi myös lisätä osastoksi vaihdon ja lahjoituksen
 - Sovellukseen tulee etusivu jossa näkyvät uusimmat ilmoitukset.
 - Ilmoitukseen tulee otsikko ja pidempi tekstikenttä ja siihen voi myös lisätä yhden kuvan. 
 - Etusivulla näkyvät otsikot joista klikkaamalla avautuu koko ilmoitus
@@ -12,11 +14,11 @@ Sovelluksen nykytilanne:
 - Ilmoituksen tekemiseen on lomake johon syötetään tiedot ja valitaan kategoria, ilmoitustyyppi
 -Rekisteröityminen, kirjautuminen ja uloskirjautuminen on toteutettu. 
 - Ilmoitukset voi valita näytettäväksi myös kategorioittain ilmoitustyyppien mukaan(myynti, osto jne.) ja niitä voi selata sekä tehdä sanhakuja. Tämä on toteutettu yhtenä hakuna.  
--ilmoituksen voi poistaa
+- ilmoituksen voi poistaa
 - Haku toteutettu lomakkeella jossa voi valita kategorian, ilmoitustyypin ja lisätä hakusanan sekä otsikosta että ilmoitustekstistä
  
 Vielä tehtävää:
--Ilmoituksille voi laittaa viimeisen voimassaolopäivän jonka jälkeen ilmoitusta ei näytetä (en tiedä omko tämä edes tarpeellinen)
+- Ilmoituksille voi laittaa viimeisen voimassaolopäivän jonka jälkeen ilmoitusta ei näytetä (en tiedä omko tämä edes tarpeellinen)
 
 
 Sovellus on tarkoitettu tavaran (tai miksei palveluidenkin) myyntiin, ostamiseen, vaihtamiseen ja lahjoittamiseen. 

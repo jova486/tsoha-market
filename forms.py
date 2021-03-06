@@ -23,7 +23,7 @@ class LoginForm(FlaskForm):
 class new_adForm(FlaskForm):
     item = StringField('Otsikko', validators=[DataRequired()])
     ad = TextAreaField('Ilmoitus teksti')
-    radios = RadioField('Luokka', default=1, choices=[(1, 'Myydään'), (2, 'Ostetaan')])
+    radios = RadioField('Luokka', default=1, choices=[(1, 'Myydään'), (2, 'Ostetaan'),('3', 'Vaihdetaan'), ('4', 'Lahjoitetaan')])
     cat = SelectField('Osasto', choices=[])
     image = FileField('Lisää kuva', validators=[FileAllowed(['jpg']),DataRequired()])
     submit = SubmitField('Lähetä')
@@ -31,7 +31,7 @@ class new_adForm(FlaskForm):
 
 class search_Form(FlaskForm):
     cat = SelectField('Osastosta', choices=[])
-    radios = RadioField('Luokka', default='1', choices=[('1', 'Myydään'), ('2', 'Ostetaan')])
+    radios = RadioField('Luokka', default='1', choices=[('1', 'Myydään'), ('2', 'Ostetaan'),('3', 'Vaihdetaan'), ('4', 'Lahjoitetaan')])
     submit = SubmitField('Haku')
     item = StringField('Hae otsikosta')
     ad = StringField('Hae ilmoitustekstistä')
