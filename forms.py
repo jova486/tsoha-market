@@ -28,6 +28,9 @@ class new_adForm(FlaskForm):
     image = FileField('Lisää kuva', validators=[FileAllowed(['jpg']),DataRequired()])
     submit = SubmitField('Lähetä')
 
+class new_categoryForm(FlaskForm):
+    cat = StringField('osasto', validators=[DataRequired()])
+    submit = SubmitField('Lisää')
 
 class search_Form(FlaskForm):
     cat = SelectField('Osastosta', choices=[])

@@ -64,6 +64,9 @@
               <a class="list-group-item list-group-item-light bg-light" href="\search">Haku</a>
               <a class="list-group-item list-group-item-light bg-light" href="\login">Kirjaudu sisään</a>
               {% endif %}
+              {% if session['admin'] %}
+              <a class="list-group-item list-group-item-light bg-light" href="\new_cat">Lisää osasto</a>
+              {% endif %}
               
             </ul>
             </p>

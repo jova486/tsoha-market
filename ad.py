@@ -72,6 +72,12 @@ def new_ad(cat_id, ad_type, valid, item, ad_text, image):
     db.session.commit()
     return True
 
+def new_cat(cat_name):
+    sql = "INSERT INTO category(parent_id, dep, cat_name) VALUES (0,0,:cat_name)"
+    result = db.session.execute(sql, {"cat_name":cat_name})
+    db.session.commit()
+    return True
+
 def delete_ad(id):
     sql = "UPDATE ad SET ad_type=5 WHERE id=:id"
     db.session.execute(sql, {"id":id})

@@ -1,7 +1,7 @@
 from app import app
 import messages, users, ad
 from flask import Flask, render_template, request, flash, redirect, make_response
-from forms import RegistrationForm, LoginForm, new_adForm, new_mesageForm, search_Form
+from forms import RegistrationForm, LoginForm, new_adForm, new_mesageForm, search_Form, new_categoryForm
 
 
 @app.route("/")
@@ -103,8 +103,21 @@ def new_ad():
             flash(f'Ilmoituksen jättäminen onnistui otsikolla:  {form.item.data}!', 'success')
             return redirect("/")
         else:
-            flash('new_ad Unsuccessful. Please check username and password', 'danger')
+            flash('Ilmoituksen jättäminen epäonnistui', 'danger')
     return render_template('new_ad.html', title='new_ad', form=form)
+
+@app.route("/new_cat", methods=['GET', 'POST'])
+def new_cat():
+    form = new_categoryForm()
+    if form.validate_on_submit():
+        cat = form.cat.data
+        
+        if ad.new_cat(cat):
+            flash(f'Luotu uusi osasto:  {form.cat.data}!', 'success')
+            return redirect("/")
+        else:
+            flash('Osaston luonti epäonnistui', 'danger')
+    return render_template('new_cat.html', title='new_cat', form=form)
 
 @app.route("/search", methods=['GET', 'POST'])
 def search():

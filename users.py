@@ -11,8 +11,14 @@ def login(username,password):
         return False
     else:
         if check_password_hash(user[0],password):
+            
             session["user_id"] = user[1]
             session['logged_in'] = True
+            if level()==1:
+                session["admin"] = True
+                print(session["admin"])
+            else:
+                session["admin"] = False
             return True
         else:
             return False
@@ -20,6 +26,7 @@ def login(username,password):
 def logout():
     del session["user_id"]
     session['logged_in'] = False
+    session["admin"] = False
     
 
 def register(username,password):
@@ -43,3 +50,12 @@ def get_username():
     result = db.session.execute(sql, {"id":id})
     name = result.fetchone()[0]
     return name
+
+def level():
+    id = user_id()
+    if id == 0:
+        return False
+    sql = "SELECT user_level FROM users WHERE id=:id"
+    result = db.session.execute(sql, {"id":id})
+    level = result.fetchone()[0]
+    return level
