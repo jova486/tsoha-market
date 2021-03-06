@@ -1,9 +1,10 @@
 Tietokantasovellus harjoitustyö
 
 sovellusta voi kokeilla Herokussa: https://tsoha-market.herokuapp.com/
-Voi rekisteröityä ja jättää ilmoituksen ja lähettää viestejä. Ilmoitukseen pitää laittaa kuva muuten se ei näy.
+Voi rekisteröityä ja jättää ilmoituksen ja lähettää viestejä. Ilmoitukseen pitää laittaa kuva muuten se ei näy. Sovellukseen voi kirjautua adminina tunnus: admin salasana: Sal975
 
 Sovelluksen nykytilanne:
+- Adminilla mahdollisuus lisätä osastoja
 - Haku toimii nyt odotetusti
 - Nyt voi myös lisätä osastoksi vaihdon ja lahjoituksen
 - Sovellukseen tulee etusivu jossa näkyvät uusimmat ilmoitukset.
