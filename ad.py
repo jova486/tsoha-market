@@ -33,7 +33,7 @@ def search(cat_id, ad_type, item, ad_text):
     ad_text = s+ad_text
     ad_text +=s
     sql = """SELECT A.id, A.item, A.ad_text, C.cat_name, A.img, A.user_id FROM ad A, category C 
-        WHERE A.cat_id = C.id AND A.ad_type != 5 AND A.cat_id=:cat_id and A.ad_type=:ad_type AND A.sent_at > current_date - A.valid ORDER BY A.sent_at DESC"""
+        WHERE A.cat_id = C.id AND A.ad_type != 5 AND A.cat_id=:cat_id and A.ad_type=:ad_type AND A.sent_at > current_date - A.valid"""
     if(item != "%%"):
         print("item")
         if(ad_text != "%%"):
@@ -47,6 +47,7 @@ def search(cat_id, ad_type, item, ad_text):
             sql += " OR A.ad_text ILIKE :ad_text)"
         else:
             sql += " AND A.ad_text ILIKE :ad_text"
+    sql += " ORDER BY A.sent_at DESC"
     result = db.session.execute(sql, {"cat_id":cat_id, "ad_type":ad_type, "item":item, "ad_text":ad_text})
     list = result.fetchall()
     return list
