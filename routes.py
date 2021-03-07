@@ -91,11 +91,12 @@ def new_ad():
         return redirect("/")
     form = new_adForm()
     result = ad.get_cat()
+    form.valid.data= 30
     form.cat.choices = [(r['id'],r['cat_name'] ) for r in result]
     if form.validate_on_submit():
         cat_id = form.cat.data
         ad_type = form.radios.data
-        valid = 30
+        valid = form.valid.data
         item = form.item.data
         ad_text = form.ad.data
         image = form.image.data

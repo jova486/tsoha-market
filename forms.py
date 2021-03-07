@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, TextAreaField, PasswordField, SubmitField, BooleanField, RadioField, SelectField, FileField
-from wtforms.validators import DataRequired, Length, EqualTo, Regexp
+from wtforms import StringField, TextAreaField, PasswordField, SubmitField, BooleanField, RadioField, SelectField, FileField, IntegerField 
+from wtforms.validators import DataRequired, Length, EqualTo, Regexp, NumberRange
+
 
 
 class RegistrationForm(FlaskForm):
@@ -25,6 +26,7 @@ class new_adForm(FlaskForm):
     ad = TextAreaField('Ilmoitus teksti')
     radios = RadioField('Luokka', default=1, choices=[(1, 'Myydään'), (2, 'Ostetaan'),('3', 'Vaihdetaan'), ('4', 'Lahjoitetaan')])
     cat = SelectField('Osasto', choices=[])
+    valid = IntegerField('Voimassa (1-60 päivää)', [NumberRange(min=1, max=60)])
     image = FileField('Lisää kuva', validators=[FileAllowed(['jpg']),DataRequired()])
     submit = SubmitField('Lähetä')
 

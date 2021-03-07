@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% macro render_field(field) %}
 <div class="form-group">
-    <label for="{{ field.name }}" class="col-lg-2 control-label">{{ field.label.text }}</label>
+    <label for="{{ field.name }}" class="col-lg-10">{{ field.label.text }}</label>
     <div class="col-lg-10">
         {{ field(class_='form-control', **kwargs)|safe }}
         <ul>

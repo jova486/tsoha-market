@@ -4,7 +4,9 @@ from flask import make_response, flash
 
 def get_list():
    
-    sql = "SELECT A.id, A.item, A.ad_text, C.cat_name, A.img, A.user_id FROM ad A, category C WHERE A.cat_id = C.id AND A.ad_type != 5 ORDER BY A.sent_at DESC"
+   
+    sql = """SELECT A.id, A.item, A.ad_text, C.cat_name, A.img, A.user_id FROM ad A, category C 
+    WHERE A.cat_id = C.id AND A.ad_type != 5 AND A.sent_at > current_date - A.valid ORDER BY A.sent_at DESC"""
     result = db.session.execute(sql)
    
     list = result.fetchall()
@@ -17,7 +19,8 @@ def get_my_list():
     if user_id == 0:
         return False
     
-    sql = "SELECT A.id, A.item, A.ad_text, C.cat_name, A.img, A.user_id FROM ad A, category C WHERE A.cat_id = C.id AND A.user_id=:user_id AND A.ad_type != 5 ORDER BY A.sent_at DESC"
+    sql = """SELECT A.id, A.item, A.ad_text, C.cat_name, A.img, A.user_id FROM ad A, category C 
+    WHERE A.cat_id = C.id AND A.user_id=:user_id AND A.ad_type != 5 AND A.sent_at > current_date - A.valid ORDER BY A.sent_at DESC"""
     result = db.session.execute(sql, {"user_id":user_id})
     list = result.fetchall()
    
@@ -30,7 +33,7 @@ def search(cat_id, ad_type, item, ad_text):
     ad_text = s+ad_text
     ad_text +=s
     sql = """SELECT A.id, A.item, A.ad_text, C.cat_name, A.img, A.user_id FROM ad A, category C 
-        WHERE A.cat_id = C.id AND A.ad_type != 5 AND A.cat_id=:cat_id and A.ad_type=:ad_type"""
+        WHERE A.cat_id = C.id AND A.ad_type != 5 AND A.cat_id=:cat_id and A.ad_type=:ad_type AND A.sent_at > current_date - A.valid ORDER BY A.sent_at DESC"""
     if(item != "%%"):
         print("item")
         if(ad_text != "%%"):
@@ -63,9 +66,7 @@ def new_ad(cat_id, ad_type, valid, item, ad_text, image):
     result = db.session.execute(sql)
     db.session.commit()
     img=result.fetchall()[0][0]
-    valid = 30
 
-    
     sql = """INSERT INTO ad (user_id, cat_id, ad_type, sent_at, valid, item, ad_text, img)
              VALUES (:user_id, :cat_id, :ad_type, NOW(), :valid, :item, :ad_text, :img)"""
     db.session.execute(sql, {"user_id":user_id, "cat_id":cat_id, "ad_type":ad_type, "valid":valid, "item":item, "ad_text":ad_text, "img":img})

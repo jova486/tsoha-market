@@ -3,23 +3,17 @@ Tietokantasovellus harjoitustyö
 sovellusta voi kokeilla Herokussa: https://tsoha-market.herokuapp.com/
 Voi rekisteröityä ja jättää ilmoituksen ja lähettää viestejä. Ilmoitukseen pitää laittaa kuva muuten se ei näy. Sovellukseen voi kirjautua adminina tunnus: admin salasana: Sal975
 
-Sovelluksen nykytilanne:
-- Adminilla mahdollisuus lisätä osastoja
-- Haku toimii nyt odotetusti
-- Nyt voi myös lisätä osastoksi vaihdon ja lahjoituksen
-- Sovellukseen tulee etusivu jossa näkyvät uusimmat ilmoitukset.
-- Ilmoitukseen tulee otsikko ja pidempi tekstikenttä ja siihen voi myös lisätä yhden kuvan. 
-- Etusivulla näkyvät otsikot joista klikkaamalla avautuu koko ilmoitus
-- Ilmoitukset voi valita näytettäväksi myös kategorioittain ilmoitustyyppien mukaan(myynti, osto jne.) ja niitä voi selata sekä tehdä sanhakuja. 
-- Käyttäjät voivat lähettää viestejä ilmoituksen jättäjälle ja sovellus ei vastaa tiedoista joita käyttäjät toisilleen lähettävät. Eli näitä tieoja ei salata vaan viestit tallennetaan sellaisenaan tietokantaan
-- Ilmoituksen tekemiseen on lomake johon syötetään tiedot ja valitaan kategoria, ilmoitustyyppi
--Rekisteröityminen, kirjautuminen ja uloskirjautuminen on toteutettu. 
-- Ilmoitukset voi valita näytettäväksi myös kategorioittain ilmoitustyyppien mukaan(myynti, osto jne.) ja niitä voi selata sekä tehdä sanhakuja. Tämä on toteutettu yhtenä hakuna.  
-- ilmoituksen voi poistaa
-- Haku toteutettu lomakkeella jossa voi valita kategorian, ilmoitustyypin ja lisätä hakusanan sekä otsikosta että ilmoitustekstistä
+
+- Sovelluksessa on etusivu jossa näkyvät uusimmat ilmoitukset aikajärjestyksess. Etusivulle pääsee Tsoha-Kauppa tekstistä vasemmassa ylänurkassa 
+- Haulla voi etsiä ilmoituksia osastoittaan ja tehdä sanahakuja 
+- Ilmoituksille voi laittaa viimeisen voimassaolopäivän jonka jälkeen ilmoitusta ei näytetä. Maksimi on 60 päivää.
+- Käyttäjän tulee rekisteröity voidakseen lisätä ja poistaa ilmoituksia. 
+- Käyttäjät voivat lähettää viestejä ilmoituksen jättäjälle mutta sovellus ei vastaa tiedoista joita käyttäjät toisilleen lähettävät. Eli näitä tieoja ei salata vaan viestit tallennetaan sellaisenaan tietokantaan. Viesteihin voi myös vastata.
+- Käyttäjät eivät voi lisätä kategorioita vaan ainoastaa admin.
+- Ilmoituksen tekemiseen on lomake johon syötetään tiedot ja valitaan kategoria, ilmoitustyyppi ja voimassaolo. Kaikkiin ilmoituksiin vaaditaan kuva.
  
-Vielä tehtävää:
-- Ilmoituksille voi laittaa viimeisen voimassaolopäivän jonka jälkeen ilmoitusta ei näytetä (en tiedä omko tämä edes tarpeellinen)
+Vielä tehtävää: Kaikki suunniteltu on toteutettu, osoto ilmoituksiin kuvan vaatiminen on asia joka pitäisi korjata mutta havahduin tähän ongelmaan liian myöhään, viestien järjestely olisi tehtävä paremmin. 
+
 
 
 Sovellus on tarkoitettu tavaran (tai miksei palveluidenkin) myyntiin, ostamiseen, vaihtamiseen ja lahjoittamiseen. 
